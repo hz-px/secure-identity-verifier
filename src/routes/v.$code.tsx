@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { getSubmissionByCode } from "@/lib/submissions.functions";
-import { RectangularQrFrame } from "./index";
+import { RectangularQrFrame } from "@/components/RectangularQrFrame";
 
 export const Route = createFileRoute("/v/$code")({
   loader: async ({ params }) => {
