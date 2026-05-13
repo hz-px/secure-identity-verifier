@@ -72,14 +72,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "PAH Vallekas" },
+      { name: "description", content: "Identificador de socios PAH Vallekas" },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "PAH Vallekas" },
+      { property: "og:description", content: "Identificador de socios PAH Vallekas" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "PAH Vallekas" },
+      { name: "twitter:description", content: "Identificador de socios PAH Vallekas" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/RKZwIME7JYU2vep9oM6A5JUhsv42/social-images/social-1778663419944-image-Photoroom-19.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/RKZwIME7JYU2vep9oM6A5JUhsv42/social-images/social-1778663419944-image-Photoroom-19.webp" },
     ],
     links: [
       {
