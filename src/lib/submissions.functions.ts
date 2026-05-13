@@ -37,7 +37,7 @@ async function generateUniqueCode(): Promise<string> {
 export const createSubmission = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => submitSchema.parse(d))
   .handler(async ({ data }) => {
-    const code6 = await generateUniqueCode();
+    const code7 = await generateUniqueCode();
     const id = crypto.randomUUID();
 
     // Decode photo
@@ -51,7 +51,7 @@ export const createSubmission = createServerFn({ method: "POST" })
     if (photoUp.error) throw new Error(`Photo upload failed: ${photoUp.error.message}`);
 
     // Generate QR (rectangular badge rendered downstream; underlying payload is standard QR URL)
-    const verifyUrl = `${data.origin.replace(/\/$/, "")}/v/${code6}`;
+    const verifyUrl = `${data.origin.replace(/\/$/, "")}/v/${code7}`;
     const qrPng = await QRCode.toBuffer(verifyUrl, {
       errorCorrectionLevel: "M",
       margin: 2,
@@ -66,7 +66,7 @@ export const createSubmission = createServerFn({ method: "POST" })
 
     const ins = await supabaseAdmin.from("submissions").insert({
       id,
-      code6,
+      code7,
       full_name: data.fullName,
       username1: data.username1,
       username2: data.username2,
@@ -77,7 +77,7 @@ export const createSubmission = createServerFn({ method: "POST" })
 
     return {
       id,
-      code6,
+      code7,
       verifyUrl,
       photoUrl: publicUrl("photos", photoPath),
       qrUrl: publicUrl("qrcodes", qrPath),
