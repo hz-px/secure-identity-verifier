@@ -85,12 +85,12 @@ export const createSubmission = createServerFn({ method: "POST" })
   });
 
 export const getSubmissionByCode = createServerFn({ method: "GET" })
-  .inputValidator((d: unknown) => z.object({ code: z.string().regex(/^\d{6}$/) }).parse(d))
+  .inputValidator((d: unknown) => z.object({ code: z.string().regex(/^\d{7}$/) }).parse(d))
   .handler(async ({ data }) => {
     const { data: row, error } = await supabaseAdmin
       .from("submissions")
       .select("*")
-      .eq("code6", data.code)
+      .eq("code7", data.code)
       .maybeSingle();
     if (error) throw new Error(error.message);
     if (!row) return { found: false as const };
@@ -98,7 +98,7 @@ export const getSubmissionByCode = createServerFn({ method: "GET" })
       found: true as const,
       submission: {
         id: row.id,
-        code6: row.code6,
+        code7: row.code7,
         fullName: row.full_name,
         username1: row.username1,
         username2: row.username2,
