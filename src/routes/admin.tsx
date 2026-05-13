@@ -18,6 +18,7 @@ type Row = Awaited<ReturnType<typeof adminListSubmissions>>[number];
 function AdminPage() {
   const login = useServerFn(adminLogin);
   const list = useServerFn(adminListSubmissions);
+  const del = useServerFn(adminDeleteSubmission);
 
   const [u, setU] = useState("");
   const [p, setP] = useState("");
