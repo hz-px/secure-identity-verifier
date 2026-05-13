@@ -1,0 +1,1 @@
+ALTER TABLE public.submissions RENAME COLUMN code6 TO code7;
