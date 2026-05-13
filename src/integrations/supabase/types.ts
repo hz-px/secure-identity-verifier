@@ -16,7 +16,7 @@ export type Database = {
     Tables: {
       submissions: {
         Row: {
-          code6: string
+          code7: string
           created_at: string
           full_name: string
           id: string
@@ -26,7 +26,7 @@ export type Database = {
           username2: string
         }
         Insert: {
-          code6: string
+          code7: string
           created_at?: string
           full_name: string
           id?: string
@@ -36,7 +36,7 @@ export type Database = {
           username2: string
         }
         Update: {
-          code6?: string
+          code7?: string
           created_at?: string
           full_name?: string
           id?: string

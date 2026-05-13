@@ -23,11 +23,11 @@ const submitSchema = z.object({
 
 async function generateUniqueCode(): Promise<string> {
   for (let i = 0; i < 8; i++) {
-    const code = Math.floor(100000 + Math.random() * 900000).toString();
+    const code = Math.floor(1000000 + Math.random() * 9000000).toString();
     const { data } = await supabaseAdmin
       .from("submissions")
       .select("id")
-      .eq("code6", code)
+      .eq("code7", code)
       .maybeSingle();
     if (!data) return code;
   }
@@ -37,7 +37,7 @@ async function generateUniqueCode(): Promise<string> {
 export const createSubmission = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => submitSchema.parse(d))
   .handler(async ({ data }) => {
-    const code6 = await generateUniqueCode();
+    const code7 = await generateUniqueCode();
     const id = crypto.randomUUID();
 
     // Decode photo
@@ -51,7 +51,7 @@ export const createSubmission = createServerFn({ method: "POST" })
     if (photoUp.error) throw new Error(`Photo upload failed: ${photoUp.error.message}`);
 
     // Generate QR (rectangular badge rendered downstream; underlying payload is standard QR URL)
-    const verifyUrl = `${data.origin.replace(/\/$/, "")}/v/${code6}`;
+    const verifyUrl = `${data.origin.replace(/\/$/, "")}/v/${code7}`;
     const qrPng = await QRCode.toBuffer(verifyUrl, {
       errorCorrectionLevel: "M",
       margin: 2,
@@ -66,7 +66,7 @@ export const createSubmission = createServerFn({ method: "POST" })
 
     const ins = await supabaseAdmin.from("submissions").insert({
       id,
-      code6,
+      code7,
       full_name: data.fullName,
       username1: data.username1,
       username2: data.username2,
@@ -77,7 +77,7 @@ export const createSubmission = createServerFn({ method: "POST" })
 
     return {
       id,
-      code6,
+      code7,
       verifyUrl,
       photoUrl: publicUrl("photos", photoPath),
       qrUrl: publicUrl("qrcodes", qrPath),
@@ -85,12 +85,12 @@ export const createSubmission = createServerFn({ method: "POST" })
   });
 
 export const getSubmissionByCode = createServerFn({ method: "GET" })
-  .inputValidator((d: unknown) => z.object({ code: z.string().regex(/^\d{6}$/) }).parse(d))
+  .inputValidator((d: unknown) => z.object({ code: z.string().regex(/^\d{7}$/) }).parse(d))
   .handler(async ({ data }) => {
     const { data: row, error } = await supabaseAdmin
       .from("submissions")
       .select("*")
-      .eq("code6", data.code)
+      .eq("code7", data.code)
       .maybeSingle();
     if (error) throw new Error(error.message);
     if (!row) return { found: false as const };
@@ -98,7 +98,7 @@ export const getSubmissionByCode = createServerFn({ method: "GET" })
       found: true as const,
       submission: {
         id: row.id,
-        code6: row.code6,
+        code7: row.code7,
         fullName: row.full_name,
         username1: row.username1,
         username2: row.username2,
@@ -167,7 +167,7 @@ export const adminListSubmissions = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return rows.map((r) => ({
       id: r.id,
-      code6: r.code6,
+      code7: r.code7,
       fullName: r.full_name,
       username1: r.username1,
       username2: r.username2,
