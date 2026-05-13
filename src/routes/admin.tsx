@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { adminListSubmissions, adminLogin } from "@/lib/submissions.functions";
+import { adminDeleteSubmission, adminListSubmissions, adminLogin } from "@/lib/submissions.functions";
 
 export const Route = createFileRoute("/admin")({
   component: AdminPage,
@@ -18,6 +18,7 @@ type Row = Awaited<ReturnType<typeof adminListSubmissions>>[number];
 function AdminPage() {
   const login = useServerFn(adminLogin);
   const list = useServerFn(adminListSubmissions);
+  const del = useServerFn(adminDeleteSubmission);
 
   const [u, setU] = useState("");
   const [p, setP] = useState("");
@@ -52,6 +53,21 @@ function AdminPage() {
       setRows(data);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Failed to load");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const onDelete = async (id: string, name: string) => {
+    if (!creds) return;
+    if (!confirm(`Delete submission for ${name}? This cannot be undone.`)) return;
+    setLoading(true);
+    setError(null);
+    try {
+      await del({ data: { username: creds.u, password: creds.p, id } });
+      setRows((rs) => rs.filter((r) => r.id !== id));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Delete failed");
     } finally {
       setLoading(false);
     }
@@ -144,6 +160,13 @@ function AdminPage() {
                     </a>
                   </div>
                 </div>
+                <button
+                  onClick={() => onDelete(r.id, r.fullName)}
+                  disabled={loading}
+                  className="mt-3 w-full rounded-md border border-destructive/40 px-3 py-1.5 text-sm text-destructive hover:bg-destructive hover:text-destructive-foreground disabled:opacity-50"
+                >
+                  Delete
+                </button>
               </div>
             </div>
           ))}

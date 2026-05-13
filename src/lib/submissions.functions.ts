@@ -127,6 +127,33 @@ export const adminLogin = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+const adminDeleteSchema = adminSchema.extend({ id: z.string().uuid() });
+
+export const adminDeleteSubmission = createServerFn({ method: "POST" })
+  .inputValidator((d: unknown) => adminDeleteSchema.parse(d))
+  .handler(async ({ data }) => {
+    if (!checkAdmin(data.username, data.password)) {
+      throw new Error("Unauthorized");
+    }
+    const { data: row, error: selErr } = await supabaseAdmin
+      .from("submissions")
+      .select("photo_path, qr_path")
+      .eq("id", data.id)
+      .maybeSingle();
+    if (selErr) throw new Error(selErr.message);
+    if (!row) return { ok: true };
+
+    await supabaseAdmin.storage.from("photos").remove([row.photo_path]);
+    await supabaseAdmin.storage.from("qrcodes").remove([row.qr_path]);
+
+    const { error: delErr } = await supabaseAdmin
+      .from("submissions")
+      .delete()
+      .eq("id", data.id);
+    if (delErr) throw new Error(delErr.message);
+    return { ok: true };
+  });
+
 export const adminListSubmissions = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => adminSchema.parse(d))
   .handler(async ({ data }) => {
