@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { adminListSubmissions, adminLogin } from "@/lib/submissions.functions";
+import { adminDeleteSubmission, adminListSubmissions, adminLogin } from "@/lib/submissions.functions";
 
 export const Route = createFileRoute("/admin")({
   component: AdminPage,
