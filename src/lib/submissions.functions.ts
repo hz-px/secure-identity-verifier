@@ -23,11 +23,11 @@ const submitSchema = z.object({
 
 async function generateUniqueCode(): Promise<string> {
   for (let i = 0; i < 8; i++) {
-    const code = Math.floor(100000 + Math.random() * 900000).toString();
+    const code = Math.floor(1000000 + Math.random() * 9000000).toString();
     const { data } = await supabaseAdmin
       .from("submissions")
       .select("id")
-      .eq("code6", code)
+      .eq("code7", code)
       .maybeSingle();
     if (!data) return code;
   }
