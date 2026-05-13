@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { createSubmission } from "@/lib/submissions.functions";
+import { RectangularQrFrame } from "@/components/RectangularQrFrame";
 
 export const Route = createFileRoute("/")({
   component: Index,
