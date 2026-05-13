@@ -160,6 +160,13 @@ function AdminPage() {
                     </a>
                   </div>
                 </div>
+                <button
+                  onClick={() => onDelete(r.id, r.fullName)}
+                  disabled={loading}
+                  className="mt-3 w-full rounded-md border border-destructive/40 px-3 py-1.5 text-sm text-destructive hover:bg-destructive hover:text-destructive-foreground disabled:opacity-50"
+                >
+                  Delete
+                </button>
               </div>
             </div>
           ))}
