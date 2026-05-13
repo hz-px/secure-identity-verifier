@@ -58,6 +58,21 @@ function AdminPage() {
     }
   };
 
+  const onDelete = async (id: string, name: string) => {
+    if (!creds) return;
+    if (!confirm(`Delete submission for ${name}? This cannot be undone.`)) return;
+    setLoading(true);
+    setError(null);
+    try {
+      await del({ data: { username: creds.u, password: creds.p, id } });
+      setRows((rs) => rs.filter((r) => r.id !== id));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Delete failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (!creds) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-background text-foreground">
