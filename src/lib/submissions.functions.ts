@@ -167,7 +167,7 @@ export const adminListSubmissions = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return rows.map((r) => ({
       id: r.id,
-      code6: r.code6,
+      code7: r.code7,
       fullName: r.full_name,
       username1: r.username1,
       username2: r.username2,
