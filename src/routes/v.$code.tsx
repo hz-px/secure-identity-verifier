@@ -50,7 +50,7 @@ function VerifyPage() {
           <div className="p-6">
             <h1 className="text-2xl font-semibold tracking-tight">{s.fullName}</h1>
             <dl className="mt-4 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
-              <Row label="ID" value={s.code6} mono />
+              <Row label="ID" value={s.code7} mono />
               <Row label="Created" value={new Date(s.createdAt).toLocaleString()} />
               <Row label="Username 1" value={s.username1} />
               <Row label="Username 2" value={s.username2} />

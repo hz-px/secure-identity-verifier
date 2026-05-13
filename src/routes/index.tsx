@@ -85,13 +85,13 @@ function Index() {
           <div className="mt-8 rounded-lg border bg-card p-6">
             <div className="flex items-center justify-between text-sm text-muted-foreground">
               <span>ID</span>
-              <span className="font-mono text-foreground">{result.code6}</span>
+              <span className="font-mono text-foreground">{result.code7}</span>
             </div>
             <div className="mt-6 flex justify-center">
               <RectangularQrFrame src={result.qrUrl} />
             </div>
             <div className="mt-6 flex flex-col gap-2 text-sm">
-              <a className="text-primary underline" href={result.qrUrl} download={`qr-${result.code6}.png`}>
+              <a className="text-primary underline" href={result.qrUrl} download={`qr-${result.code7}.png`}>
                 Download QR
               </a>
               <a className="text-primary underline" href={result.verifyUrl}>
