@@ -24,7 +24,9 @@ export async function generateRmqrPngDataUrl(text: string, scale = 8): Promise<s
   canvas.height = img.height;
   const ctx = canvas.getContext("2d");
   if (!ctx) throw new Error("Canvas not available");
-  const imageData = new ImageData(img.data, img.width, img.height);
+  const buf = new Uint8ClampedArray(img.data.length);
+  buf.set(img.data);
+  const imageData = new ImageData(buf, img.width, img.height);
   ctx.putImageData(imageData, 0, 0);
   return canvas.toDataURL("image/png");
 }
