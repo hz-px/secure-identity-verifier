@@ -1,10 +1,10 @@
 // Browser-side rMQR (Rectangular Micro QR) generator using qrean WASM.
 // Renders to an offscreen canvas and returns a PNG data URL.
-import { Qrean } from "qrean";
-
-let qreanPromise: Promise<Qrean> | null = null;
-function getQrean() {
-  if (!qreanPromise) qreanPromise = Qrean.create();
+let qreanPromise: Promise<any> | null = null;
+async function getQrean() {
+  if (!qreanPromise) {
+    qreanPromise = import("qrean").then((m) => m.Qrean.create());
+  }
   return qreanPromise;
 }
 
