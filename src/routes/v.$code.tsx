@@ -95,8 +95,15 @@ function VerifyPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-xl px-6 py-16">
-        <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary" /> Verified
+        <div className="flex flex-wrap gap-2">
+          {(s.fullName.trim().toLowerCase() === "admin admin admin"
+            ? ["Verified", "Admin", "Vallekas"]
+            : ["Verified"]
+          ).map((label) => (
+            <div key={label} className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" /> {label}
+            </div>
+          ))}
         </div>
 
         <div className="mt-8 overflow-hidden rounded-xl border bg-card">
