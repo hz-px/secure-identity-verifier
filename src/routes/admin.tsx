@@ -147,11 +147,19 @@ function AdminPage() {
                   {new Date(r.createdAt).toLocaleString()}
                 </p>
                 <div className="mt-3 flex items-center gap-3">
-                  <img src={r.qrUrl} alt="QR" className="h-20 w-20 rounded border bg-white object-contain" />
+                  {r.qrUrl ? (
+                    <img src={r.qrUrl} alt="rMQR" className="h-20 w-32 rounded border bg-white object-contain" />
+                  ) : (
+                    <div className="flex h-20 w-32 items-center justify-center rounded border bg-muted text-[10px] text-muted-foreground">
+                      QR pending
+                    </div>
+                  )}
                   <div className="flex flex-col gap-1 text-xs">
-                    <a className="text-primary underline" href={r.qrUrl} target="_blank" rel="noreferrer">
-                      QR image
-                    </a>
+                    {r.qrUrl && (
+                      <a className="text-primary underline" href={r.qrUrl} target="_blank" rel="noreferrer">
+                        rMQR image
+                      </a>
+                    )}
                     <a className="text-primary underline" href={`/v/${r.code6}`} target="_blank" rel="noreferrer">
                       Verify page
                     </a>
