@@ -138,7 +138,7 @@ function AdminPage() {
               <div className="p-4">
                 <div className="flex items-baseline justify-between">
                   <h2 className="font-semibold">{r.fullName}</h2>
-                  <span className="font-mono text-sm text-muted-foreground">{r.code7}</span>
+                  <span className="font-mono text-sm text-muted-foreground">{r.code6}</span>
                 </div>
                 <p className="mt-1 text-xs text-muted-foreground">
                   @{r.username1} · @{r.username2}
@@ -147,12 +147,20 @@ function AdminPage() {
                   {new Date(r.createdAt).toLocaleString()}
                 </p>
                 <div className="mt-3 flex items-center gap-3">
-                  <img src={r.qrUrl} alt="QR" className="h-20 w-20 rounded border bg-white object-contain" />
+                  {r.qrUrl ? (
+                    <img src={r.qrUrl} alt="rMQR" className="h-20 w-32 rounded border bg-white object-contain" />
+                  ) : (
+                    <div className="flex h-20 w-32 items-center justify-center rounded border bg-muted text-[10px] text-muted-foreground">
+                      QR pending
+                    </div>
+                  )}
                   <div className="flex flex-col gap-1 text-xs">
-                    <a className="text-primary underline" href={r.qrUrl} target="_blank" rel="noreferrer">
-                      QR image
-                    </a>
-                    <a className="text-primary underline" href={`/v/${r.code7}`} target="_blank" rel="noreferrer">
+                    {r.qrUrl && (
+                      <a className="text-primary underline" href={r.qrUrl} target="_blank" rel="noreferrer">
+                        rMQR image
+                      </a>
+                    )}
+                    <a className="text-primary underline" href={`/v/${r.code6}`} target="_blank" rel="noreferrer">
                       Verify page
                     </a>
                     <a className="text-primary underline" href={r.photoUrl} target="_blank" rel="noreferrer">

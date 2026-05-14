@@ -16,32 +16,32 @@ export type Database = {
     Tables: {
       submissions: {
         Row: {
-          code7: string
+          code6: string
           created_at: string
           full_name: string
           id: string
           photo_path: string
-          qr_path: string
+          qr_path: string | null
           username1: string
           username2: string
         }
         Insert: {
-          code7: string
+          code6: string
           created_at?: string
           full_name: string
           id?: string
           photo_path: string
-          qr_path: string
+          qr_path?: string | null
           username1: string
           username2: string
         }
         Update: {
-          code7?: string
+          code6?: string
           created_at?: string
           full_name?: string
           id?: string
           photo_path?: string
-          qr_path?: string
+          qr_path?: string | null
           username1?: string
           username2?: string
         }
