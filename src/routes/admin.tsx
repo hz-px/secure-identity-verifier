@@ -138,7 +138,7 @@ function AdminPage() {
               <div className="p-4">
                 <div className="flex items-baseline justify-between">
                   <h2 className="font-semibold">{r.fullName}</h2>
-                  <span className="font-mono text-sm text-muted-foreground">{r.code7}</span>
+                  <span className="font-mono text-sm text-muted-foreground">{r.code6}</span>
                 </div>
                 <p className="mt-1 text-xs text-muted-foreground">
                   @{r.username1} · @{r.username2}
@@ -152,7 +152,7 @@ function AdminPage() {
                     <a className="text-primary underline" href={r.qrUrl} target="_blank" rel="noreferrer">
                       QR image
                     </a>
-                    <a className="text-primary underline" href={`/v/${r.code7}`} target="_blank" rel="noreferrer">
+                    <a className="text-primary underline" href={`/v/${r.code6}`} target="_blank" rel="noreferrer">
                       Verify page
                     </a>
                     <a className="text-primary underline" href={r.photoUrl} target="_blank" rel="noreferrer">
